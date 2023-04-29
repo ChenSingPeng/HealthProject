@@ -1,0 +1,6 @@
+com\singpeng\service\impl\CheckGroupServiceImpl.class
+com\singpeng\dao\SetmealDao.class
+com\singpeng\dao\CheckItemDao.class
+com\singpeng\service\impl\CheckItemServiceImpl.class
+com\singpeng\dao\CheckGroupDao.class
+com\singpeng\service\impl\SetmealServiceImpl.class

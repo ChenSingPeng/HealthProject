@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.singpeng.dao.CheckItemDao">
+    <!--新增-->
+    <insert id="add" parameterType="com.singpeng.pojo.CheckItem">
+        insert into t_checkitem(code,name,sex,age,price,type,remark,attention) values (#{code},#{name},#{sex},#{age},#{price},#{type},#{remark},#{attention})
+    </insert>
+    <delete id="deleteById" parameterType="int">
+        delete from t_checkitem where id = #{id}
+    </delete>
+    <select id="selectByCondition" parameterType="string"
+            resultType="com.singpeng.pojo.CheckItem">
+        select *
+        from t_checkitem
+        <if test="value != null and value.length>0">
+            where code =#{value} or name = #{value}
+        </if>
+    </select>
+    <select id="findCountByCheckItemId" resultType="long" parameterType="int">
+        select count(*) from t_checkgroup_checkitem where checkitem_id = #{checkitem_id}
+    </select>
+    <select id="findById"  parameterType="int" resultType="com.singpeng.pojo.CheckItem">
+        select * from t_checkitem where id = #{id};
+    </select>
+    <select id="findAll" resultType="com.singpeng.pojo.CheckItem">
+        select * from t_checkitem
+    </select>
+    <update id="edit" parameterType="com.singpeng.pojo.CheckItem">
+        update t_checkitem
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="sex!=null">
+                sex = #{sex},
+            </if>
+            <if test="code!=null">
+                code = #{code},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="price!=null">
+                price = #{price},
+            </if>
+            <if test="type!=null">
+                type = #{type},
+            </if>
+            <if test="attention!=null">
+                attention = #{attention},
+            </if>
+            <if test="remark!=null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

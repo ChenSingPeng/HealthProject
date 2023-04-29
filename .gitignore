@@ -1,0 +1,11 @@
+# IntelliJ IDEA Files  
+*.iml
+*.ipr
+*.iws
+*.idea 
+*.jar
+*.war
+*.ear
+*.zip
+*.class
+*.bak

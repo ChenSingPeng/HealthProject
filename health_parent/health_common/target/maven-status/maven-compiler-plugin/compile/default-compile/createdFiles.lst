@@ -1,0 +1,16 @@
+com\singpeng\pojo\Menu.class
+com\singpeng\pojo\User.class
+com\singpeng\pojo\Order.class
+com\singpeng\pojo\Role.class
+com\singpeng\entity\Result.class
+com\singpeng\constant\MessageConstant.class
+com\singpeng\utils\QiniuUtils.class
+com\singpeng\Main.class
+com\singpeng\pojo\CheckItem.class
+com\singpeng\pojo\Member.class
+com\singpeng\pojo\Permission.class
+com\singpeng\pojo\CheckGroup.class
+com\singpeng\entity\QueryPageBean.class
+com\singpeng\entity\PageResult.class
+com\singpeng\pojo\OrderSetting.class
+com\singpeng\pojo\Setmeal.class
