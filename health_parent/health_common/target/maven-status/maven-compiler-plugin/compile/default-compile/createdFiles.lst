@@ -3,6 +3,7 @@ com\singpeng\pojo\User.class
 com\singpeng\pojo\Order.class
 com\singpeng\pojo\Role.class
 com\singpeng\entity\Result.class
+com\singpeng\constant\RedisConstant.class
 com\singpeng\constant\MessageConstant.class
 com\singpeng\utils\QiniuUtils.class
 com\singpeng\Main.class
