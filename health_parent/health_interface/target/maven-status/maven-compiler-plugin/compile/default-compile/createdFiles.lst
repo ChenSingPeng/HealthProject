@@ -1,4 +1,5 @@
 com\singpeng\service\CheckGroupService.class
 com\singpeng\service\SetmealService.class
 com\singpeng\service\CheckItemService.class
+com\singpeng\service\OrderSettingService.class
 com\singpeng\Main.class

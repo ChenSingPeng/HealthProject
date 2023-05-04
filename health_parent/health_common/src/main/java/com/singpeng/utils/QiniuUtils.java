@@ -56,8 +56,8 @@ public class QiniuUtils {
             Response response = uploadManager.put(bytes, key, upToken);
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            System.out.println(putRet.key);
-            System.out.println(putRet.hash);
+            System.out.println("Upload Photo Name:"+putRet.key);
+            System.out.println("Upload Photo Hash Value:"+putRet.hash);
         } catch (QiniuException ex) {
             Response r = ex.response;
             System.err.println(r.toString());
@@ -78,6 +78,7 @@ public class QiniuUtils {
         BucketManager bucketManager = new BucketManager(auth, cfg);
         try {
             bucketManager.delete(bucket, key);
+            System.out.println("Delete Photo Name:"+key);
         } catch (QiniuException ex) {
             //如果遇到异常，说明删除失败
             System.err.println(ex.code());

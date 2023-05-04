@@ -1,3 +1,4 @@
 com\singpeng\controller\SetmealController.class
 com\singpeng\controller\CheckGroupController.class
+com\singpeng\controller\OrderSettingController.class
 com\singpeng\controller\CheckItemController.class
