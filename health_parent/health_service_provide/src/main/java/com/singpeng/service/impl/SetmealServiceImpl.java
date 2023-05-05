@@ -78,6 +78,16 @@ public class SetmealServiceImpl  implements SetmealService{
 
     }
 
+    @Override
+    public List<Setmeal> findAll() {
+        return setmealdao.findAll();
+    }
+
+    @Override
+    public Setmeal findByIdToEdit(Integer id) {
+        return setmealdao.findByIdToEdit(id);
+    }
+
     // bind setmeal and checkgroup relation N:M
     private void setSetmealAndCheckGroup(Integer setmealId, Integer[] checkgroupIds){
         for (Integer checkgroupId : checkgroupIds) {

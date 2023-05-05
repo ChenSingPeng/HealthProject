@@ -454,7 +454,7 @@
             //弹出编辑窗口
             handleUpdate(row) {
                 //发送ajax请求根据id查询检查组信息，用于基本信息回显
-                axios.get("/setmeal/findById.do?id=" + row.id).then((res) => {
+                axios.get("/setmeal/findByIdToEdit.do?id=" + row.id).then((res) => {
                     if (res.data.flag) {
                         //弹出编辑窗口
                         this.dialogFormVisible4Edit = true;

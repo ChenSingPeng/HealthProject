@@ -21,4 +21,8 @@ public interface SetmealDao {
     void edit(Setmeal setmeal);
 
     void deleteById(Integer id);
+
+    List<Setmeal> findAll();
+
+    Setmeal findByIdToEdit(Integer id);
 }

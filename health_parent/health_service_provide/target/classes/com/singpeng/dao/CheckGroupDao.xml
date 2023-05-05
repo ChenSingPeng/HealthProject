@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.singpeng.dao.CheckGroupDao">
+    <resultMap id="baseResultMap" type="com.singpeng.pojo.CheckGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap id="findByIdResultMap" type="com.singpeng.pojo.CheckGroup" extends="baseResultMap">
+        <!--! 检查组和检查项多对多映射-->
+        <collection
+                property="checkItems"
+                ofType="com.singpeng.pojo.CheckItem"
+                column="id" select="com.singpeng.dao.CheckItemDao.findCheckItemById">
+
+        </collection>
+    </resultMap>
+
     <!--新增-->
     <insert id="add" parameterType="com.singpeng.pojo.CheckGroup">
         <!--获取存储后的id值-->
@@ -68,5 +87,8 @@
         </set>
             where id = #{id}
     </update>
+    <select id="findCheckGroupById" parameterType="int" resultMap="findByIdResultMap">
+        select * from t_checkgroup where id in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id = #{id})
+    </select>
 
 </mapper>

@@ -56,4 +56,8 @@
         </set>
         where id = #{id}
     </update>
+    <!-- 根据检查组id查询检查项-->
+    <select id="findCheckItemById" parameterType="int" resultType="com.singpeng.pojo.CheckItem">
+        select * from t_checkitem where id in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id =#{id})
+    </select>
 </mapper>
