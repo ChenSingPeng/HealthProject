@@ -24,5 +24,5 @@ public interface SetmealService {
 
     public List<Setmeal> findAll();
 
-    Setmeal findByIdToEdit(Integer id);
+
 }

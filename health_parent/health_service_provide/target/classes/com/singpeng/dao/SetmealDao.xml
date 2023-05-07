@@ -54,16 +54,17 @@
             where code = #{value} or name = #{value} or helpCode = #{value}
         </if>
     </select>
-    <select id="findById" resultMap="findByIdResultMap" parameterType="int">
+    <select id="findByIdToDetail" resultMap="findByIdResultMap" parameterType="int">
         select * from t_setmeal where id=#{id}
     </select>
+    <!--用于多表查询-->
     <select id="findCheckGroupIdsBySetmealId" resultMap="findByIdResultMap" parameterType="int">
         select checkgroup_id from t_setmeal_checkgroup where setmeal_id =#{id}
     </select>
     <select id="findAll" resultType="com.singpeng.pojo.Setmeal">
         select * from t_setmeal
     </select>
-    <select id="findByIdToEdit" resultType="com.singpeng.pojo.Setmeal" parameterType="int">
+    <select id="findById" resultType="com.singpeng.pojo.Setmeal" parameterType="int">
         select *
         from t_setmeal where id =#{id};
     </select>

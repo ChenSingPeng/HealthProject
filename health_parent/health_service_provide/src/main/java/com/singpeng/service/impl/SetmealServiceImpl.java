@@ -9,11 +9,16 @@ import com.singpeng.entity.PageResult;
 import com.singpeng.pojo.CheckGroup;
 import com.singpeng.pojo.Setmeal;
 import com.singpeng.service.SetmealService;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import org.apache.poi.ss.formula.functions.Intercept;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import redis.clients.jedis.JedisPool;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,17 +36,73 @@ public class SetmealServiceImpl  implements SetmealService{
     @Autowired
     private JedisPool jedisPool;
 
+    @Autowired
+    private FreeMarkerConfigurer freeMarkerConfigurer;
+
+    @Value("${out_put_path}")
+    private String outPutPath;
+
     //新增套餐
     @Override
     public void add(Setmeal setmeal, Integer[] checkgroupIds){
         setmealdao.add(setmeal);
+        Integer setmealId = setmeal.getId();
         if (checkgroupIds != null && checkgroupIds.length>0){
             // bind relation N:M
             setSetmealAndCheckGroup(setmeal.getId(),checkgroupIds);
         }
         //将图片的名称保存至Redis
         savePicToRedis(setmeal.getImg());
-        //setSetmealAndCheckGroup(setmeal.getId(),checkgroupIds);
+        //新增套餐后需要重新生成静态页面
+        generateMobileStaticHtml();
+    }
+    //生成静态页面
+    private void generateMobileStaticHtml() {
+        //准备模板文件
+        List<Setmeal> setmealList = setmealdao.findAll();
+        //生成套餐列表静态页面
+        generateMobileSetmealListHtml(setmealList);
+        //生成套餐详情页面
+        generateMobileSetmealDetailHtml(setmealList);
+    }
+
+    private void generateMobileSetmealDetailHtml(List<Setmeal> setmealList) {
+        for (Setmeal setmeal : setmealList) {
+            Map<String, Object> dataMap = new HashMap<String,Object>();
+            dataMap.put("setmeal",setmealdao.findByIdToDetail(setmeal.getId()));
+            this.generateHtml("mobile_setmeal_detail.ftl","setmeal_detail_"+setmeal.getId()+".html",dataMap);
+        }
+    }
+
+    //生成套餐列表静态页面
+    private void generateMobileSetmealListHtml(List<Setmeal> setmealList) {
+        Map<String,Object> dataMap =new HashMap<String,Object>();
+        dataMap.put("setmealList",setmealList);
+        this.generateHtml("mobile_setmeal.ftl","m_setmeal.html",dataMap);
+    }
+
+    private void generateHtml(String templateName,String htmlPageName, Map<String, Object> dataMap) {
+        Configuration configuration = freeMarkerConfigurer.getConfiguration();
+        Writer out = null;
+        try{
+            //加载模板
+            Template template = configuration.getTemplate(templateName);
+            //生成数据
+            File docFile = new File(outPutPath + "\\" + htmlPageName);
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            //输出文件
+            template.process(dataMap,out);
+        } catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (null!=out){
+                    out.flush();
+                }
+            }catch (Exception e2){
+                e2.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -83,10 +144,6 @@ public class SetmealServiceImpl  implements SetmealService{
         return setmealdao.findAll();
     }
 
-    @Override
-    public Setmeal findByIdToEdit(Integer id) {
-        return setmealdao.findByIdToEdit(id);
-    }
 
     // bind setmeal and checkgroup relation N:M
     private void setSetmealAndCheckGroup(Integer setmealId, Integer[] checkgroupIds){

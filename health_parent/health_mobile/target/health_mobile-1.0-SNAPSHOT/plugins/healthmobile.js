@@ -80,3 +80,14 @@ function doLoop() {
         nums = 30; //重置时间
     }
 }
+
+//邮箱校验
+function  checkEmail(email){
+    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    if (!reg.test(email)){
+        return false;
+    }else {
+        return true;
+    }
+}
+

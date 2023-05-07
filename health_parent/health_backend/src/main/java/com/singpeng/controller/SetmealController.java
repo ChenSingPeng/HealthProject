@@ -86,7 +86,7 @@ public class SetmealController {
     @RequestMapping("/findByIdToEdit")
     public Result findById(Integer id){
         try {
-            Setmeal setmeal = setmealService.findByIdToEdit(id);
+            Setmeal setmeal = setmealService.findById(id);
             return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setmeal);
         } catch (Exception e){
             return new Result(false,MessageConstant.QUERY_SETMEAL_FAIL);

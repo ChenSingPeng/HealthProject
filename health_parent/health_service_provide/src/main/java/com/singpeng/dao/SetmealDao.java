@@ -14,7 +14,7 @@ public interface SetmealDao {
 
     public void deleteAssociation(Integer id);
 
-    Setmeal findById(Integer id);
+    Setmeal findByIdToDetail(Integer id);
 
     List<Integer> findCheckGroupIdsBySetmealId(Integer id);
 
@@ -24,5 +24,5 @@ public interface SetmealDao {
 
     List<Setmeal> findAll();
 
-    Setmeal findByIdToEdit(Integer id);
+    Setmeal findById(Integer id);
 }
