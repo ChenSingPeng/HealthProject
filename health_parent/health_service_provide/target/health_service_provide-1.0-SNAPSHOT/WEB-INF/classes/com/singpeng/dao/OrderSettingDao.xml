@@ -18,4 +18,12 @@
     <select id="getOrderSettingByMonth" resultType="com.singpeng.pojo.OrderSetting" parameterType="hashmap">
         select * from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
     </select>
+    <!--更新已预约人数-->
+    <update id="editReservationsByOrderDate" parameterType="com.singpeng.pojo.OrderSetting">
+        update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
+    </update>
+    <!--根据日期查询预约设置信息-->
+    <select id="findByOrderDate" parameterType="date" resultType="com.singpeng.pojo.OrderSetting">
+        select * from t_ordersetting where orderDate = #{orderDate}
+    </select>
 </mapper>

@@ -103,6 +103,7 @@
         <script>
             var vue = new Vue({
                 el:'#app',
+                var :inputType = "",
                 data:{
                     setmeal:{},//套餐信息
                     orderInfo:{
@@ -114,22 +115,24 @@
                     //发送验证码
                     sendValidateCode(){
                         //获取用户输入
-                        var inputType = "";
+                        /*var inputType = "";*/
                         var telponeOrEmail=this.orderInfo.telponeOrEmail;
                         if (telponeOrEmail.includes("@")&&telponeOrEmail.includes(".")){
-                            inputType = "email"
+                            this.inputType = "email"
                             if (!checkEmail(telponeOrEmail)){
-                                this.$message.error("请输入正确的邮箱号或手机号!")
+                                this.$message.error("请输入正确的邮箱号或手机号!");
+                                return false;
                             }
                         }else{
-                            inputType = "telephone";
+                            this.inputType="telephone"
                             if (!checkTelephone(telponeOrEmail)){
-                                this.$message.error("请输入正确的邮箱号或手机号!")
+                                this.$message.error("请输入正确的邮箱号或手机号!");
+                                return false;
                             }
                         }
                         validateCodeButton = $("#validateCodeButton")[0];
                         clock = window.setInterval(doLoop,1000);//一秒执行一次
-                        axios.post("/validateCode/sendToOrder.do?telponeOrEmail="+telponeOrEmail+"&inputType="+inputType).then((response)=>{
+                        axios.post("/validateCode/sendToOrder.do?telponeOrEmail="+telponeOrEmail).then((response)=>{
                             if (!response.data.flag){
                                 //发送失败
                                 this.$message.error("验证码发送失败，请检查手机号输入是否正确!")
@@ -138,6 +141,20 @@
                     },
                     //提交预约
                     submitOrder(){
+                        //校验身份证号
+                        if (!checkIdCard(this.orderInfo.idCard)){
+                            this.$message.error('身份证号输入错误，请重新输入');
+                            return;
+                        }
+                        axios.post("/order/submit.do?",this.orderInfo).then((response)=>{
+                            if (response.data.flag){
+                                //预约成功
+                                window.location.href="orderSuccess.html?orderId="+response.data.data;
+                            }else {
+                                //预约失败
+                                this.$message.error(response.data.message);
+                            }
+                        })
                     }
                 },
                 mounted(){
