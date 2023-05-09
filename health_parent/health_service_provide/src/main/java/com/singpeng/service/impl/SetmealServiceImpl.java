@@ -144,6 +144,11 @@ public class SetmealServiceImpl  implements SetmealService{
         return setmealdao.findAll();
     }
 
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        return setmealdao.findSetmealCount();
+    }
+
 
     // bind setmeal and checkgroup relation N:M
     private void setSetmealAndCheckGroup(Integer setmealId, Integer[] checkgroupIds){

@@ -7,6 +7,7 @@ import com.singpeng.entity.QueryPageBean;
 import com.singpeng.entity.Result;
 import com.singpeng.pojo.CheckItem;
 import com.singpeng.service.CheckItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class CheckItemController {
     private CheckItemService checkItemService;
 
     //新增
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_ADD')")//权限校验
     @RequestMapping("/add")
     public Result add(@RequestBody CheckItem checkItem){
         try {
@@ -32,6 +34,8 @@ public class CheckItemController {
         }
         return new Result(true,MessageConstant.ADD_CHECKITEM_SUCCESS);
     }
+    //分页查询
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_QUERY')")//权限校验
     @RequestMapping("/findPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = checkItemService.pageQuery(queryPageBean);
@@ -48,6 +52,7 @@ public class CheckItemController {
     }*/
 
     //删除
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_DELETE')")//权限校验
     @RequestMapping("/delete")
     public Result delete(Integer id){
         try {
@@ -60,6 +65,7 @@ public class CheckItemController {
         return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
     //查询
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_QUERY')")//权限校验
     @RequestMapping("/findById")
     public Result finByid(Integer id){
         try {
@@ -72,6 +78,7 @@ public class CheckItemController {
         }
     }
     //编辑
+    @PreAuthorize("hasAnyAuthority('CHECKITEM_EDIT')")//权限校验
     @RequestMapping("/findAll")
     public Result findAll(){
         try {

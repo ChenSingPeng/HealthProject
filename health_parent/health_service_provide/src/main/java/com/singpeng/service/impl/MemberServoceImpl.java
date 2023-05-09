@@ -8,6 +8,9 @@ import com.singpeng.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service(interfaceClass = MemberService.class)
 @Transactional
 public class MemberServoceImpl implements MemberService {
@@ -25,5 +28,17 @@ public class MemberServoceImpl implements MemberService {
     @Override
     public Member findByTelephone(String teelphone) {
         return memberDao.findByTelephone(teelphone);
+    }
+
+    @Override
+    public List<Integer> findMemberCountByMonth(List<String> month) {
+        List<Integer> list = new ArrayList<>();
+        for (String m : month) {
+            m=m+".31";//2022.02.25
+            Integer count = memberDao.findMemberCountBeforeDate(m);
+            list.add(count);
+        }
+        return list;
+
     }
 }

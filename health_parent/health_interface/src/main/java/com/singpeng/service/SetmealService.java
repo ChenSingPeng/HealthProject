@@ -4,6 +4,7 @@ import com.singpeng.entity.PageResult;
 import com.singpeng.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 套餐服务接口
@@ -25,4 +26,5 @@ public interface SetmealService {
     public List<Setmeal> findAll();
 
 
+    List<Map<String, Object>> findSetmealCount();
 }
