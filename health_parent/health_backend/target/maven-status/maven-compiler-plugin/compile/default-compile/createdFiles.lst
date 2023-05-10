@@ -1,4 +1,7 @@
 com\singpeng\controller\SetmealController.class
+com\singpeng\controller\ReportController.class
+com\singpeng\controller\UserController.class
 com\singpeng\controller\CheckGroupController.class
 com\singpeng\controller\OrderSettingController.class
+com\singpeng\service\SpringSecurityUserService.class
 com\singpeng\controller\CheckItemController.class

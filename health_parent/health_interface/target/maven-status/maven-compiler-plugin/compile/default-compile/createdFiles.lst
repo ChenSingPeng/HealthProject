@@ -1,3 +1,4 @@
+com\singpeng\service\ReportService.class
 com\singpeng\service\CheckGroupService.class
 com\singpeng\service\OrderSettingService.class
 com\singpeng\service\UserService.class
