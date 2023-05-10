@@ -3,10 +3,10 @@
 此项目的原创作者为：传智播客——黑马程序员<br>
 传智健康管理系统是一款应用于健康管理机构的业务系统，实现健康管理机构工作内容可视化、会员管理专业化、健康评估数字化、健康干预流程化、知识库集成化，从而提高健康管理师的工作效率，加强与会员间的互动，增强管理者对健康管理机构运营情况的了解。
 此项目用到的技术栈如下：<br>
-![Image text]
-
+![Image text](https://github.com/ChenSingPeng/HealthProject/assets/105356759/db517721-7944-4452-bf91-c9372b68a4d9)
 
 主要设计架构：<br>
+![Image text](https://github.com/ChenSingPeng/HealthProject/assets/105356759/503812cf-a72e-4047-a747-d53246075b69)
 
 项目实际运行效果图：<br>
 ![Image text](https://github.com/ChenSingPeng/HealthProject/assets/105356759/4d731cd5-c631-4267-b3f5-96501b8e2ba1)
